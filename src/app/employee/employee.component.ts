@@ -31,14 +31,14 @@ export class EmployeeComponent {
   get gender(): AbstractControl<string> {return <AbstractControl<string>>this.employeeForm.get('gender'); }
   get email(): AbstractControl<string> {return <AbstractControl<string>>this.employeeForm.get('email'); }
 
-  onSubmit() {
+  async onSubmit() {
     const employee: Employee = new Employee(this.name.value,
       new Date(this.dateOfBirth.value),
       this.city.value,
       this.salary.value,
       this.gender.value,
       this.email.value);
-    this.employeeService.addEmployee(employee);
+    await this.employeeService.addEmployee(employee);
     this.employeeForm.reset();
     this.router.navigate(['/employees']).then(() => {});
   }
